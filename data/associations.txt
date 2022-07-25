@@ -1,0 +1,112 @@
+noble, noble:3, cultist:3, bandit:3, guard:5, acolyte:2, thug:3, orc:1, spy:2, warhorse:3, bandit captain:2, cult fanatic:1, knight:2, vampire spawn:1, vampire:1
+stirge, stirge:5, zombie:2, constrictor snake:4, giant poisonous snake:3, crocodile:3, giant wasp:4, ghoul:1, ogre zombie:1, flesh golem:1
+tribal warrior, tribal warrior:5, wolf:3, panther:2, dire wolf:1, cultist:2
+kobold, kobold:5, lizardfolk:3, giant lizard:3, hobgoblin:2, orc:1, ogre:1
+cultist, cultist:5, cult fanatic:3, tribal warrior:2, goblin:2, zombie:3, skeleton:3, shadow:2, thug:2, spy:1, ghoul:2, wight:1, wraith:1, barbed devil:2, drider:2, chain devil:1
+bandit, bandit:5, noble:2, guard:2, thug:3, orc:2, warhorse:2, spy:1, bandit captain:4, berserker:2
+giant rat, giant rat:5, goblin:3, swarm of rats:4, zombie:1, skeleton:1, harpy:1, ghoul:1
+guard, guard:5, noble:2, thug:2, warhorse:3, bandit captain:2, knight:1
+wolf, wolf:5, tribal warrior:1, orc:1, worg:3, dire wolf:3, druid:1, werewolf:1
+acolyte, cultist:4, bandit:2, tribal warrior:2, orc:1, goblin:2, cult fanatic:3
+panther, tribal warrior:2, panther:4, drow:2, lizardfolk:3, orc:1, dryad:1, druid:2, green hag:1, ettin:2
+goblin, cultist:2, giant rat:3, goblin:5, orc:2, worg:3, hobgoblin:3, night hag:1
+giant wolf spider, stirge:2, constrictor snake:2, giant poisonous snake:2, giant lizard:1, giant centipede:3, giant spider:3, giant wolf spider:4
+giant bat, stirge:2, giant bat:5, skeleton:1, zombie:1, death dog:1, minotaur skeleton:1, wererat:1, vampire spawn:2
+skeleton, skeleton:5, zombie:4, cultist:2, shadow:2, gnoll:2, minotaur skeleton:2, ogre zombie:2, gargoyle:1, cult fanatic:3, mummy:1, wight:1
+zombie, skeleton:4, zombie:5, cultist:2, shadow:1, gnoll:1, minotaur skeleton:1, ogre zombie:2, gargoyle:1, cult fanatic:3, mummy:1, wight:1
+drow, cultist:3, bandit:2, skeleton:2, zombie:2, thug:2, spy:3, panther:2, cult fanatic:3, manticore:1, drider:1
+dretch, cultist:2, dretch:4, gnoll:1, imp:1, cult fanatic:2, barbed devil:2
+constrictor snake, stirge:3, constrictor snake:3, giant poisonous snake:2, giant wasp:2, giant constrictor snake:2, druid:1
+giant poisonous snake, giant wolf spider:2, giant wasp:2, cockatrice:1, giant constrictor snake:5, giant crocodile:3, crocodile:3
+flying sword, noble:1, animated armor:3, ghost:3, mage:5, gargoyle:1
+swarm of rats, kobold:3, giant rat:5, zombie:1, skeleton:1
+giant lizard, giant lizard:5, stirge:2, kobold:2, constrictor snake:1, crocodile:2, lizardfolk:4, giant constrictor snake:2, black dragon wyrmling:2, red dragon wyrmling:2, young black dragon:1, young red dragon:1
+giant centipede, stirge:3, giant centipede:4, giant wolf spider:2
+satyr, satyr:4, bandit:3, bandit captain:3
+crocodile, crocodile:5, stirge:2, lizardfolk:3, giant constrictor snake:2, giant crocodile:4
+shadow, shadow:4, cultist:3, dretch:1, ghoul:1, cult fanatic:2
+giant wasp, giant wasp:4, stirge:2, giant spider:3, giant scorpion:2
+warhorse skeleton, warhorse skeleton:3, skeleton:4, wight:2, drow:3
+lizardfolk, crocodile:2, giant lizard:3, lizardfolk:5, kobold:3, red dragon wyrmling:2, black dragon wyrmling:2, young red dragon:1, young black dragon:1
+thug, bandit:3, cultist:2, bandit captain:1, noble:1, thug:3
+magmin, magmin:3, hobgoblin:3, fire elemental:1
+black bear, black bear:3, tribal warrior:2, troll:1, hill giant:2, werebear:1
+orc, bandit:2, kobold:3, goblin:3, orc:5, wyvern:1, manticore:1, giant boar:3, ettin:2
+giant boar, orc:3, giant boar:4, bugbear:2
+gnoll, gnoll:5, wererat:2, werebear:1, werewolf:1, hell hound:3, troll:1
+warhorse, noble:2, bandit captain:3, guard:2, warhorse:1
+cockatrice, cockatrice:2, lizardfolk:3, giant lizard:2, giant eagle:2
+worg, worg:5, goblin:3, orc:2, dire wolf:1
+hobgoblin, hobgoblin:5, magmin:2, earth elemental:1, fire elemental:1
+spy, noble:1, spy:2, cult fanatic:2, bandit captain:2, assassin:2
+tiger, tiger:3, tribal warrior:1, saber-toothed tiger:2, hill giant:1
+hippogriff, hippogriff:3, tribal warrior:3, giant eagle:2, guard:2
+brown bear, brown bear:4, black bear:3, werebear:1, orc:2
+death dog, death dog:4, dire wolf:2, wolf:3
+harpy, giant eagle:3, harpy:5, imp:1
+ghoul, ghoul:4, wight:1, zombie:2, skeleton:2, cultist:2, cult fanatic:3
+dryad, dryad:3, wolf:2, brown bear:2, black bear:2, giant eagle:2, black dragon wyrmling:1, red dragon wyrmling:1
+giant eagle, giant eagle:4, tribal warrior:1, griffon:1, hippogriff:1
+giant spider, giant centipede:2, giant spider:5, giant wasp:2
+imp, cultist:3, imp:2, giant rat:2, giant spider:2, cult fanatic:1
+animated armor, animated armor:2, flying sword:4, mage:4, wight:1, mummy:1
+dire wolf, wolf:4, dire wolf:2, werewolf:1
+specter, skeleton:4, specter:2, ghoul:2
+bugbear, bugbear:3, brown bear:2, black bear:2, dire wolf:2, saber-toothed tiger:2
+minotaur skeleton, minotaur skeleton:4, skeleton:3, minotaur:3
+ogre, ogre:3, goblin:4, giant boar:2, ettin:1
+ogre zombie, ogre:4, ogre zombie:2, cult fanatic:2
+giant constrictor snake, giant poisonous snake:3, giant constrictor snake:3, medusa:1, basilisk:1, giant scorpion:2
+gargoyle, mage:3, archmage:2, vampire:1, vampire spawn:1, cult fanatic:1
+bandit captain, bandit:5, bandit captain:1, thug:2, berserker:2
+awakened tree, dryad:2, druid:2, awakened tree:3, giant wasp:3, giant constrictor snake:3
+griffon, griffon:3, giant eagle:2
+berserker, berserker:4, bandit:2
+cult fanatic, cult fanatic:3, cultist:5, wight:2, mummy:2, horned devil:1, chain devil:1, barbed devil:1
+saber-toothed tiger, saber-toothed tiger:3, tiger:2, hill giant:3, orc:1
+wererat, giant rat:5, wererat:3, werewolf:1, werebear:1, swarm of rats:2
+black dragon wyrmling, lizardfolk:3, black dragon wyrmling:1, red dragon wyrmling:1, young red dragon:1, young black dragon:3
+druid, wolf:3, black bear:3, brown bear:3, griffon:1
+wight, cult fanatic:3, skeleton:5, zombie:4, ghoul:3, night hag:2
+hell hound, night hag:4, salamander:1, mage:3, young black dragon:1
+basilisk, archmage:2, mage:3, giant constrictor snake:4
+manticore, lamia:3, manticore:3, orc:1, night hag:2
+minotaur, minotaur:4, minotaur skeleton:2, cult fanatic:3, cultist:2
+knight, guard:4, knight:3, warhorse:3, noble:1
+werewolf, werewolf:4, dire wolf:3, werebear:2, gnoll:3
+mummy, mummy:3, mummy lord:1, skeleton:5
+green hag, bandit:3, guard:3, knight:1, dire wolf:3
+giant scorpion, giant scorpion:4, giant centipede:3, giant wasp:2
+ghost, wight:1, ghost:2, skeleton:3
+ettin, orc:4, hill giant:1, goblin:3
+lamia, noble:2, guard:3, knight:3
+red dragon wyrmling, lizardfolk:4, young red dragon:2, red dragon wyrmling:3
+flesh golem, mage:2, cult fanatic:3, archmage:2
+wraith, skeleton:4, minotaur skeleton:2, zombie:2, ghoul:2
+earth elemental, hobgoblin:3
+salamander, magmin:4, fire elemental:2
+werebear, brown bear:2, black bear:2, werebear:3, werewolf:2
+night hag, death dog:3, imp:2, gargoyle:2
+vampire spawn, vampire spawn:4, vampire:2, giant bat:4, hell hound:2
+giant crocodile, giant crocodile:2, lizardfolk:3, crocodile:3
+barbed devil, cult fanatic:3, dretch:4, gnoll:3
+hill giant, ettin:2, hill giant:4, giant boar:3
+troll, goblin:3, troll:1, kobold:3, bandit:2
+fire elemental, hobgoblin:3, magmin:2
+wyvern, orc:1, wyvern:3, lizardfolk:2
+medusa, giant constrictor snake:3, giant poisonous snake:3, gargoyle:3
+mage, flying sword:4, animated armor:2, imp:3, manticore:1, chimera:1
+drider, giant spider:3, giant scorpion:3, drow:5
+chimera, archmage:3, mage:1, adult black dragon:1
+young black dragon, lizardfolk:4
+oni, ogre:2, cultist:4, cult fanatic:2
+assassin, noble:2, spy:2, assassin:3, bandit captain:4
+spirit naga, lizardfolk:3, giant scorpion:3, guard:2
+chain devil, vampire:2, vampire spawn:3, dretch:4
+hydra, giant constrictor snake:3, giant poisonous snake:3
+young red dragon, lizardfolk:4, red dragon wyrmling:3
+horned devil, cult fanatic:3, cultist:5, barbed devil:2
+archmage, animated armor:4, flying sword:3, chimera:2, assassin:2, imp:3
+vampire, giant bat:4, vampire spawn:3, vampire:2, gargoyle:3, chain devil:2
+adult black dragon, black dragon wyrmling:3, lizardfolk:4, hell hound:2
+mummy lord, mummy:5, skeleton:4, wight:3
