@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
-import model
+import util
 
-monster_data_header = model.srcdir / "_monster_data.h"
-monster_data_source = model.srcdir / "_monster_data.c"
+monster_data_header = util.srcdir / "_monster_data.h"
+monster_data_source = util.srcdir / "_monster_data.c"
 
 
 class MonsterDataStruct:
@@ -19,7 +19,7 @@ class MonsterDataStruct:
 
 
 def main():
-    monsters = model.Monster.load()
+    monsters = util.load()
     header_source = f"""
 #ifndef BAKED_IN_DATA_H
 #define BAKED_IN_DATA_H
@@ -33,8 +33,8 @@ extern MonsterData BAKED_IN_MONSTER_DATA[BAKED_IN_LENGTH];
 #include "_monster_data.h"
 MonsterData BAKED_IN_MONSTER_DATA[BAKED_IN_LENGTH] = {{{",".join(map(str, structs))}}};
     """.strip()
-    model.backup(monster_data_header)
-    model.backup(monster_data_source)
+    util.backup(monster_data_header)
+    util.backup(monster_data_source)
     monster_data_header.write_text(header_source)
     monster_data_source.write_text(source_source)
     return 0

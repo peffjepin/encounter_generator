@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-import model
+import util
 
 
 def main():
-    paths = list(model.root.iterdir())
+    paths = list(util.root.iterdir())
     while paths:
         p = paths.pop()
         if p.is_dir():

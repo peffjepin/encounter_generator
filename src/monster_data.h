@@ -2,7 +2,11 @@
 #define MONSTER_DATA_H
 
 #include <stddef.h>
+
 #define MAX_MONSTERS 256
+#define STATIC_CONFIG_FILEPATH "data/associations.conf"
+
+extern size_t number_monsters;
 
 enum Challenge {
     CR0,
@@ -53,11 +57,9 @@ typedef struct {
 } AssociationWeights;
 
 typedef struct {
-    size_t id;  // monster ids should start at 0
+    size_t id; // monster ids should start at 0
     enum Challenge cr;
 } MonsterData;
-
-extern size_t number_monsters;
 
 AssociationWeights* get_association_weights(size_t monster_id);
 size_t* ids_by_cr(enum Challenge cr, size_t* length);
@@ -65,7 +67,7 @@ MonsterData* monster_data_by_id(size_t monster_id);
 
 void init_monster_data(MonsterData* data, size_t length);
 void free_monster_data(void);
-void init_weights_table(void);
+void init_weights_table(char* filepath);
 void free_weights_table(void);
 
 #endif // MONSTER_DATA_H

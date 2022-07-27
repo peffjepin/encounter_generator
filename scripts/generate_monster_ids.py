@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-import model
+import util
 
 
 def main():
-    monsters = model.Monster.load()
+    monsters = util.load()
     for i, m in enumerate(monsters):
         m.id = i
-    model.Monster.dump(monsters)
+    util.dump(monsters)
     return 0
 
 

@@ -19,7 +19,6 @@ size_t number_monsters = 0;
 static AssociationWeights* weights_table = NULL;
 
 #define MAX_ASSOCIATIONS 32
-#define CONFIG_FILEPATH "data/associations.conf"
 
 typedef struct {
     size_t length;
@@ -68,7 +67,7 @@ void free_monster_data(void)
 #endif
 }
 
-void init_weights_table(void)
+void init_weights_table(char* filepath)
 {
 #ifdef BAKED_MONSTER_DATA
     init_monster_data(BAKED_IN_MONSTER_DATA, BAKED_IN_LENGTH);
@@ -79,8 +78,8 @@ void init_weights_table(void)
     weights_table = malloc(sizeof(AssociationWeights) * number_monsters);
     if (!weights_table) EXIT("failed to allocate weights table");
 
-    FILE* config = fopen(CONFIG_FILEPATH, "r");
-    if (!config) EXIT("failed opening %s", CONFIG_FILEPATH);
+    FILE* config = fopen(filepath, "r");
+    if (!config) EXIT("failed opening %s", filepath);
 
     char line_buffer[512];
     MonsterAssociation associations_buffer[MAX_ASSOCIATIONS];

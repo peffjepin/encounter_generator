@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-import model
+import util
 
 
 def main():
-    monsters = model.Monster.load()
+    monsters = util.load()
     lookup = {monster.id: monster.name for monster in monsters}
     import sys
 

@@ -1,4 +1,7 @@
 SOURCES := $(wildcard src/*.c)
+VENV = .testvenv
+MAKE_VENV = python3 -m venv $(VENV)
+PYTHON = $(VENV)/bin/python3
 
 all: clean generate test
 
@@ -15,3 +18,10 @@ test:
 clean:
 	./scripts/clean.py
 	rm -f testmain
+	rm -rf $(VENV)
+
+pytest: clean
+	$(MAKE_VENV);
+	$(PYTHON) -m pip install .
+	$(PYTHON) scripts/test_python_module.py
+

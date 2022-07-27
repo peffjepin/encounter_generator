@@ -182,6 +182,8 @@ make_weighted_choice(WeightedChoice* choice, RNG* rng)
 int
 generate_encounter(EncounterInputs* inputs, Encounter* encounter, RNG* rng)
 {
+    encounter->budget = calculate_xp_budget(inputs);
+
     unsigned total_player_level = 0;
     for (size_t i=0; i < inputs->number_of_characters; i++) {
         total_player_level += inputs->character_levels[i];
@@ -231,17 +233,16 @@ int
 main(void)
 {
     init_monster_data(BAKED_IN_MONSTER_DATA, BAKED_IN_LENGTH);
-    init_weights_table();
+    init_weights_table(STATIC_CONFIG_FILEPATH);
 
-    EncounterInputs inputs = {{1, 2, 2, 5}, 4, Deadly};
+    EncounterInputs inputs = {{1, 2, 3, 5}, 4, Deadly};
     unsigned seed = time(0);
-    unsigned budget = calculate_xp_budget(&inputs);
     RNG rng = {.seed=seed};
 
     printf("Starting with seed %u\n", seed);
     printf("-----------------------\n");
     for (int times=0; times < 10; times++) {
-        Encounter encounter = {.budget=budget};
+        Encounter encounter = {};
         if (generate_encounter(&inputs, &encounter, &rng)) {
             printf("generation exited with errorcode\n");
             return 1;
