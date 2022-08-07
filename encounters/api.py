@@ -2,7 +2,7 @@ import _encounters
 import time
 import pathlib
 
-from .model import Monster
+from .data.model import Monster
 
 datadir = pathlib.Path(__file__).parent / "data"
 monsters = [eval(ln) for ln in (datadir / "reprs").read_text().splitlines()]
