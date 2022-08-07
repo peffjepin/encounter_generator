@@ -1,8 +1,9 @@
 #include <assert.h>
-#include "noise.h"
-#include "monster_data.h"
 
-enum EncounterDifficulty {Easy, Medium, Hard, Deadly};
+#include "monster_data.h"
+#include "noise.h"
+
+enum EncounterDifficulty { Easy, Medium, Hard, Deadly };
 
 #define MAX_CHARACTERS 10
 #define MAX_ENEMIES 20
@@ -10,6 +11,8 @@ enum EncounterDifficulty {Easy, Medium, Hard, Deadly};
 typedef struct {
     unsigned character_levels[MAX_CHARACTERS];
     size_t number_of_characters;
+    size_t seed_monster_ids[MAX_ENEMIES];
+    size_t number_of_seed_monsters;
     enum EncounterDifficulty difficulty;
 } EncounterInputs;
 
