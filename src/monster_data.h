@@ -8,7 +8,7 @@
 
 extern size_t number_monsters;
 
-enum Challenge {
+typedef enum {
     CR0,
     CR1_8,
     CR1_4,
@@ -44,7 +44,7 @@ enum Challenge {
     CR29,
     CR30,
     CR_MAX
-};
+} Challenge;
 
 typedef struct {
     size_t monster_id;
@@ -57,12 +57,12 @@ typedef struct {
 } AssociationWeights;
 
 typedef struct {
-    size_t id; // monster ids should start at 0
-    enum Challenge cr;
+    size_t id;  // monster ids should start at 0
+    Challenge cr;
 } MonsterData;
 
 AssociationWeights* get_association_weights(size_t monster_id);
-size_t* ids_by_cr(enum Challenge cr, size_t* length);
+size_t* ids_by_cr(Challenge cr, size_t* length);
 MonsterData* monster_data_by_id(size_t monster_id);
 
 void init_monster_data(MonsterData* data, size_t length);
@@ -70,4 +70,4 @@ void free_monster_data(void);
 void init_weights_table(char* filepath);
 void free_weights_table(void);
 
-#endif // MONSTER_DATA_H
+#endif  // MONSTER_DATA_H

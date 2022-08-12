@@ -133,7 +133,7 @@ get_association_weights(size_t monster_id)
 }
 
 size_t *
-ids_by_cr(enum Challenge cr, size_t* length)
+ids_by_cr(Challenge cr, size_t* length)
 {
     MonstersByCR entry = monster_ids_by_cr_lookup[cr];
     if (length != NULL) *length = entry.length;

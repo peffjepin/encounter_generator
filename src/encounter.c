@@ -34,14 +34,28 @@ const ChallengeEntry CHALLENGE_TABLE[CR_MAX] = {
     [CR27] = {27.0, 105000}, [CR28] = {28.0, 120000}, [CR29] = {29.0, 135000},
     [CR30] = {30.0, 155000}};
 
-static unsigned
-calculate_xp_budget(EncounterInputs* inputs)
+static void
+set_budget(Encounter* encounter, EncounterInputs* inputs)
 {
-    unsigned budget = 0;
+    encounter->budget_target = 0;
+    encounter->budget_max = 0;
     for (size_t i = 0; i < inputs->number_of_characters; i++) {
-        budget += CHARACTER_XP_TABLE[inputs->character_levels[i] - 1][inputs->difficulty];
+        if (inputs->difficulty == Deadly) {
+            unsigned allotment =
+                CHARACTER_XP_TABLE[inputs->character_levels[i] - 1][inputs->difficulty];
+            encounter->budget_target += allotment;
+            encounter->budget_max += allotment * 1.5;
+        }
+        else {
+            encounter->budget_target +=
+                CHARACTER_XP_TABLE[inputs->character_levels[i] - 1][inputs->difficulty];
+            encounter->budget_max += CHARACTER_XP_TABLE[inputs->character_levels[i] - 1]
+                                                       [inputs->difficulty + 1];
+        }
     }
-    return budget;
+    const float budget_multiplier = 1.25;
+    encounter->budget_target *= budget_multiplier;
+    encounter->budget_max *= budget_multiplier;
 }
 
 #define EXP_COST(monster_id)                                                             \
@@ -68,7 +82,8 @@ add_monster_to_encounter(size_t monster_id, Encounter* encounter)
         size_t current_index = encounter->number_of_enemies - 1;
         float inverse_factor =
             ENCOUNTER_SIZE_MULT[current_index - 1] / ENCOUNTER_SIZE_MULT[current_index];
-        encounter->budget = (unsigned)(encounter->budget * inverse_factor);
+        encounter->budget_target *= inverse_factor;
+        encounter->budget_max *= inverse_factor;
     }
     return 0;
 }
@@ -79,7 +94,7 @@ static void
 precompute_running_totals_by_cr_array(void)
 {
     size_t total = 0;
-    for (enum Challenge cr = CR0; cr < CR_MAX; cr++) {
+    for (Challenge cr = CR0; cr < CR_MAX; cr++) {
         size_t count;
         ids_by_cr(cr, &count);
         total += count;
@@ -91,13 +106,13 @@ precompute_running_totals_by_cr_array(void)
     assert(monster_id >= 0 && monster_id < number_monsters)
 
 static size_t
-select_seed_monster(enum Challenge lower_bound, enum Challenge upper_bound, RNG* rng)
+select_seed_monster(Challenge lower_bound, Challenge upper_bound, RNG* rng)
 {
     if (running_totals_by_cr[0] == MAX_MONSTERS) precompute_running_totals_by_cr_array();
     size_t start = (lower_bound == 0) ? 0 : running_totals_by_cr[lower_bound - 1];
     size_t diff = running_totals_by_cr[upper_bound] - start;
     size_t index = start + RNG_INDEX(rng, diff - 1);
-    enum Challenge cr = lower_bound;
+    Challenge cr = lower_bound;
     while (running_totals_by_cr[cr] <= index) cr++;
     size_t prev = (cr == 0) ? 0 : running_totals_by_cr[cr - 1];
     size_t selected_monster_id = ids_by_cr(cr, NULL)[index - prev];
@@ -106,8 +121,8 @@ select_seed_monster(enum Challenge lower_bound, enum Challenge upper_bound, RNG*
 }
 
 typedef struct {
-    enum Challenge lower_bound;
-    enum Challenge upper_bound;
+    Challenge lower_bound;
+    Challenge upper_bound;
     size_t options_count;
     size_t options[MAX_MONSTERS];
     unsigned total_weight;
@@ -129,28 +144,38 @@ accumulate_monster_weights(size_t monster_id, WeightedChoice* choice)
     }
 }
 
-static size_t
-make_weighted_choice(WeightedChoice* choice, RNG* rng)
+#define MAX_RETRIES 5
+
+// returns -1 on failure
+// this might happen if the only possible choices would
+// violate the encounters maximum budget
+static int
+make_weighted_choice(WeightedChoice* choice, Encounter* encounter, RNG* rng)
 {
-    size_t index = RNG_INDEX(rng, choice->total_weight);
-    int selected_monster_id = -1;
-    unsigned running_weight = 0;
-    for (size_t i = 0; i < choice->options_count; i++) {
-        size_t monster_id = choice->options[i];
-        running_weight += choice->weights[monster_id];
-        if (running_weight >= index) {
-            selected_monster_id = monster_id;
-            break;
+    for (int attempts = 1; attempts <= MAX_RETRIES; attempts++) {
+        size_t index = RNG_INDEX(rng, choice->total_weight);
+        int selected_monster_id = -1;
+        unsigned running_weight = 0;
+        for (size_t i = 0; i < choice->options_count; i++) {
+            size_t monster_id = choice->options[i];
+            running_weight += choice->weights[monster_id];
+            if (running_weight >= index) {
+                selected_monster_id = monster_id;
+                break;
+            }
         }
+        ASSERT_VALID_MONSTER(selected_monster_id);
+
+        if (encounter->cost + EXP_COST(selected_monster_id) <= encounter->budget_max)
+            return selected_monster_id;
     }
-    ASSERT_VALID_MONSTER(selected_monster_id);
-    return selected_monster_id;
+    return -1;
 }
 
 int
 generate_encounter(EncounterInputs* inputs, Encounter* encounter, RNG* rng)
 {
-    encounter->budget = calculate_xp_budget(inputs);
+    set_budget(encounter, inputs);
 
     unsigned total_player_level = 0;
     for (size_t i = 0; i < inputs->number_of_characters; i++) {
@@ -158,17 +183,21 @@ generate_encounter(EncounterInputs* inputs, Encounter* encounter, RNG* rng)
     }
     unsigned average_player_level = total_player_level / inputs->number_of_characters;
 
-    WeightedChoice choice = {
-        // CR0, CR1_8, CR1_4, CR1_2, CR1, CR2
-        // 0    1      2      3      4    5
-        // stop using CR1_8 at player level 5 then progress linearly
-        // level 5 - 4 = CR1_8
-        .lower_bound = (average_player_level <= 4) ? 1 : ((int)average_player_level - 4),
-        // use maximum of 2 CR stage higher than average player level
-        // if player level == 1, (1 + 5) = CR3
-        // upper bound is inclusive
-        .upper_bound = average_player_level + 5,
-    };
+    // CR0, CR1_8, CR1_4, CR1_2, CR1, CR2
+    // 0    1      2      3      4    5
+    // stop using CR1_8 at player level 5 then progress linearly
+    // level 5 - 4 = CR1_8
+    Challenge lower_bound =
+        (average_player_level <= 4) ? 1 : ((int)average_player_level - 4);
+    // use maximum of 2 CR stage higher than average player level
+    // if player level == 1, (1 + 5) = CR3
+    // upper bound is inclusive
+    Challenge upper_bound = average_player_level + 5;
+    // for an easier encounter we need to make sure the exp cost
+    // associated with the upper bound wont violate encounter->budget_max
+    while (CHALLENGE_TABLE[upper_bound].experience > encounter->budget_max) upper_bound--;
+
+    WeightedChoice choice = {.lower_bound = lower_bound, .upper_bound = upper_bound};
 
     // If seed monsters aren't given we must choose one here
     if (inputs->number_of_seed_monsters == 0) {
@@ -178,7 +207,7 @@ generate_encounter(EncounterInputs* inputs, Encounter* encounter, RNG* rng)
             seed_monster_id =
                 select_seed_monster(choice.lower_bound, choice.upper_bound, rng);
             accumulate_monster_weights(seed_monster_id, &choice);
-        } while (choice.options_count == 0 && ++attempts <= 3);
+        } while (choice.options_count == 0 && ++attempts <= MAX_RETRIES);
         add_monster_to_encounter(seed_monster_id, encounter);
     }
     // Otherwise just populate the weighed choice data structure with the given
@@ -196,9 +225,9 @@ generate_encounter(EncounterInputs* inputs, Encounter* encounter, RNG* rng)
     if (choice.options_count == 0) return 1;
 
     // make weighted choices based on associations data until budget is broken
-    while (encounter->cost < encounter->budget) {
-        size_t monster_id = make_weighted_choice(&choice, rng);
-        if (add_monster_to_encounter(monster_id, encounter)) return 1;
+    while (encounter->cost < encounter->budget_target) {
+        int monster_id = make_weighted_choice(&choice, encounter, rng);
+        if (monster_id < 0 || add_monster_to_encounter(monster_id, encounter)) return 1;
         accumulate_monster_weights(monster_id, &choice);
     };
     return 0;
