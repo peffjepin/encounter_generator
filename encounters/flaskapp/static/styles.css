@@ -1,0 +1,105 @@
+.change_level_icon {
+    width: 50px;
+    height: 50px;
+}
+
+.selected_level {
+    display: block;
+    width: 50px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.character_level_selector {
+    display: inline-block;
+    width: 50px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lock_icon {
+    width: 24px;
+    height: auto;
+    display: flex;
+    margin: auto;
+}
+
+.wrapper_button {
+    background: none;
+    border: none;
+    padding: 0px;
+}
+
+#monster_card_modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.8);
+}
+
+#monster_card {
+    background-color: #fefefe;
+    margin: 25% auto;
+    border: 1px solid #888;
+    width: 70%;
+}
+
+#monster_card_close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#monster_card_close:hover,
+#monster_card_close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.input_section {
+    margin: auto;
+    width: 80%;
+    border-color: black;
+    border-style: inset;
+}
+
+#monsters_table {
+    margin: auto;
+    width: 80%;
+    border-color: black;
+    border-style: inset;
+}
+
+.monster_table_header_content {
+    text-align: left;
+    vertical-align: bottom;
+}
+
+.monster_name {
+    font-size: 22px;
+    text-decoration: underline;
+    vertical-align: bottom;
+}
+
+.monster_description {
+    font-size: 16px;
+    vertical-align: bottom;
+    font-style: italic;
+}
+
+.monster_challenge {
+    font-size: 16px;
+    vertical-align: bottom;
+}

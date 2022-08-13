@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block head %}
+<script type="application/json" id="monsters_json_dump">{{ monsters_json_object|tojson }}</script>
+<script src="{{ url_for(".static", filename="encounters.js") }}" defer></script>
+{% endblock %}
+{% block content %}
+
+<div class="input_section">
+    <div>
+        <span>Players:</span>
+        <button type="button" onclick="add_character();">+</button>
+        <button type="button" onclick="remove_character();">-</button>
+    </div>
+    <div class="center" id="character_level_inputs">
+        <span class="character_level_selector">
+            <button class="wrapper_button" onclick="change_character_level(this, 1)">
+                <img class="change_level_icon" draggable="false" src="{{ url_for(".static", filename="chevron-up.svg") }}">
+            </button>
+            <span class="selected_level">1</span>
+            <button class="wrapper_button" onclick="change_character_level(this, -1)">
+                <img class="change_level_icon" draggable="false" src="{{ url_for(".static", filename="chevron-down.svg") }}">
+            </button>
+        </span>
+    </div>
+</div>
+
+<div class="input_section">
+    <div class="center">
+        <button onclick="generate_encounter('easy')">Easy</button>
+        <button onclick="generate_encounter('medium')">Medium</button>
+        <button onclick="generate_encounter('hard')">Hard</button>
+        <button onclick="generate_encounter('deadly')">Deadly</button>
+    </div>
+</div>
+
+<div class="center">
+    <table id="monsters_table">
+        <thead>
+            <tr class="monster_table_header_row">
+                <th class="monster_table_header_content">Name</th>
+                <th class="monster_table_header_content">Description</th>
+                <th class="monster_table_header_content">Challenge</th>
+                <th class="monster_table_header_content"></th>
+            </tr>
+        </thead>
+        <tbody id="monster_table_body">
+        </tbody>
+    </table>
+</div>
+
+<div id="monster_card_modal">
+    <div id="monster_card">
+        <span id="monster_card_close" onclick="close_monster_card()">&times;</span>
+        <div id="monster_card_content"></div>
+    </div>
+</div>
+
+<div class="templates" hidden>
+    <img id="unlocked_lock" class="lock_icon" src="{{ url_for(".static", filename="lock-outline.svg") }}" onclick="toggle_monster_lock(this)">
+    <img id="locked_lock" class="lock_icon" src="{{ url_for(".static", filename="lock.svg") }}" onclick="toggle_monster_lock(this)">
+    <table>
+        <tr id="monster_entry_template" class="monster_entry">
+            <td>
+                <span class="monster_name" onclick="show_monster_card(this)"></span>
+            </td>
+            <td>
+                <span class="monster_description"></span>
+            </td>
+            <td>
+                <span class="monster_challenge"></span>
+            </td>
+            <td>
+                <div class="monster_lock_icon"></div>
+            </td>
+        </tr>
+    </table>
+</div>
+{% endblock %}

@@ -9,6 +9,8 @@ monsters = [eval(ln) for ln in (datadir / "reprs").read_text().splitlines()]
 monsters_by_id = {m.id: m for m in monsters}
 monsters_by_name = {m.name: m for m in monsters}
 
+EncounterError = _encounters.EncounterError
+
 
 def generate(player_levels, difficulty, seed=None, seed_monsters=None):
     if seed is None:
@@ -18,6 +20,7 @@ def generate(player_levels, difficulty, seed=None, seed_monsters=None):
 
 
 __all__ = (
+    "EncounterError",
     "monsters",
     "monsters_by_id",
     "monsters_by_name",
