@@ -80,7 +80,7 @@ def generate_encounter_api():
         except encounters.EncounterError:
             pass
     else:
-        return flask.jsonift({"error": "whoops, encounter generation failed"})
+        return flask.jsonify({"error": "whoops, encounter generation failed"})
 
     table_entries = [
         {
