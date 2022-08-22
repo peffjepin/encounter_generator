@@ -69,8 +69,10 @@ async function generate_encounter(difficulty) {
 
 
 function add_character() {
-    const new_input = level_inputs.firstElementChild.cloneNode(true);
-    level_inputs.appendChild(new_input);
+    if (level_inputs.children.length < 10) {
+        const new_input = level_inputs.firstElementChild.cloneNode(true);
+        level_inputs.appendChild(new_input);
+    }
 }
 
 

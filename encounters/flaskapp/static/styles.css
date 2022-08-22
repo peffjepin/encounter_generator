@@ -1,3 +1,69 @@
+:root {
+    --bg_color: #04151F;
+    --fg_color: #EFD6AC;
+    --bg_secondary: #0a2b3d;
+    --bg_tertiary: #021d2e;
+    --interactive_color: #C44900;
+}
+
+body {
+    background-color: var(--bg_color);
+}
+
+span, tr {
+    color: var(--fg_color);
+}
+
+tbody > tr:nth-child(even) {
+    background-color: var(--bg_secondary);
+}
+
+tbody > tr:nth-child(odd) {
+    background-color: var(--bg_tertiary);
+}
+
+thead > tr {
+    font-size: 20px;
+}
+
+.players_label {
+    position: absolute;
+}
+
+.generate_label {
+    position: absolute;
+}
+
+.player_controls {
+    position: absolute;
+    top: 10px;
+    right: 0;
+}
+
+.player_control_button {
+    color: var(--interactive_color);
+    font-size: 50px;
+    background: none;
+    border: none;
+}
+
+.generation_buttons {
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.generate_button {
+    color: var(--interactive_color);
+    font-size: 22px;
+    background: none;
+    border: none;
+}
+
+
 .change_level_icon {
     width: 50px;
     height: 50px;
@@ -48,38 +114,33 @@
 }
 
 #monster_card {
-    background-color: #fefefe;
+    color: var(--fg_color);
+    background-color: var(--bg_secondary);
+    padding: 10px;
     margin: 25% auto;
-    border: 1px solid #888;
+    border: 1px solid var(--fg_color);
     width: 70%;
 }
 
 #monster_card_close {
-    color: #aaa;
+    color: var(--interactive_color);
     float: right;
-    font-size: 28px;
+    padding: 6px;
+    font-size: 40px;
     font-weight: bold;
 }
 
-#monster_card_close:hover,
-#monster_card_close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 .input_section {
+    position: relative;
     margin: auto;
     width: 80%;
-    border-color: black;
-    border-style: inset;
+    border-color: var(--bg-secondary);
+    border-style: ridge;
 }
 
 #monsters_table {
     margin: auto;
     width: 80%;
-    border-color: black;
-    border-style: inset;
 }
 
 .monster_table_header_content {
@@ -90,6 +151,8 @@
 .monster_name {
     font-size: 22px;
     text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--interactive_color);
     vertical-align: bottom;
 }
 

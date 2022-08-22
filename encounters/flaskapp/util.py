@@ -69,6 +69,8 @@ def render_html_display(monster):
             f"<p>{monster.legendary_actions.get('preamble', '')}</p>"
         )
         for name, desc in monster.legendary_actions.items():
+            if name == "preamble":
+                continue
             remainder.append(labeled_p(name, desc))
 
     return base + "\n".join(remainder)
